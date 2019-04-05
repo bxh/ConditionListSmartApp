@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <script src="https://rawgithub.com/smart-on-fhir/client-js/master/dist/fhir-client.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script type="text/javascript" src="fhir-data.js"></script>
+  </head>
+  <body>
+    <div ng-app="hybridProblemPanel" ng-controller="hybridProblemPanelCtrl">
+        <h3>{{name}}</h3>
+        <table>
+            <tr>
+                <th>Condition</th>
+                <th>Category</th>
+                <th>Date Time</th>
+                <th>Source</th>
+            </tr>
+            <tr class="table" ng-repeat="condition in conditions">
+                <td>{{::getCodeText(condition.code)}}</td>
+                <td>{{::condition.category.text}}</td>
+                <td>{{::getDateTime(condition.onsetDateTime)}}</td>
+                <td><span ng-if="condition.encounter">Encounter</span><span ng-if="!condition.encounter">Claim</span></td>
+            </tr>
+        </table>
+    </div>
+  </body>
+</html>
